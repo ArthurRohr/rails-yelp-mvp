@@ -19,11 +19,13 @@ puts "Creating new restaurants..."
   name = Faker::Restaurant.name
   address = Faker::Address.street_address
   category = ["chinese", "italian", "japanese", "french", "belgian"].sample
+  phone_number = Faker::PhoneNumber.phone_number
 
   restaurant = Restaurant.create!(
     name: name,
     address: address,
-    category: category
+    category: category,
+    phone_number: phone_number
   )
 
   # Create reviews for each restaurant

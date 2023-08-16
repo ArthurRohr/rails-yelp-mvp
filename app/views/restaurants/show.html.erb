@@ -1,0 +1,38 @@
+<div class="card mb-3" style="width: 100%;">
+  <%= image_tag "https://source.unsplash.com/featured/?restaurant&#{rand(1..100)}",
+  class: "card-img-top", style: "object-fit: cover; max-height: 700px; max-width: 100%;"%>
+  <div class="card-body">
+    <h3 class="card-title"><strong><%= @restaurant.name %></strong></h3>
+    <p class="card-text"></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><strong>Category:</strong> <%= @restaurant.category.capitalize %></li>
+    <li class="list-group-item"><strong>Address:</strong> <%= @restaurant.address %></li>
+    <li class="list-group-item"><strong>Phone number:</strong> <%= @restaurant.phone_number %></li>
+  </ul>
+</div>
+
+<div class="container border p-4 mt-5">
+  <h5><strong>Reviews</strong></h5>
+  <ul class="list-group list-group-flush">
+    <% @restaurant.reviews.each do |review| %>
+      <li class="list-group-item d-flex">
+        <div>
+          <strong>Review:</strong> <%= review.content %> ------------------------
+          <strong>Rating:</strong> <%= review.rating %>
+        </div>
+        <%= link_to "Delete",
+        review_path(review),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
+        class: "ms-auto"
+        %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="my-4">
+  <%= link_to "Add a review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
+</div>
+
+<%= link_to "Back to all restaurants", restaurants_path, class: "text-decoration-none" %>

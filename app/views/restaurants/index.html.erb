@@ -1,0 +1,15 @@
+<h1>Restaurants</h1>
+<div class="cards my-5">
+  <% @restaurants.each do |restaurant| %>
+    <div class="card" style="width: 18rem;">
+      <%= image_tag "https://source.unsplash.com/featured/?restaurant&#{rand(1..100)}",
+      class: "card-img-top", style: "object-fit: cover; max-height: 200px; max-width: 100%;" %>
+      <div class="card-body">
+        <h5 class="card-title py-2"><%= restaurant.name %></h5>
+        <%= link_to "See details", restaurant_path(restaurant), class: "btn btn-primary"%>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "Add a restaurant", new_restaurant_path, class: "btn btn-primary m-3" %>

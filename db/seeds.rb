@@ -10,6 +10,7 @@
 require 'faker'
 
 # Clear existing data
+Review.destroy_all
 Restaurant.destroy_all
 
 # Create valid restaurant records using Faker
@@ -19,11 +20,22 @@ puts "Creating new restaurants..."
   address = Faker::Address.street_address
   category = ["chinese", "italian", "japanese", "french", "belgian"].sample
 
-  Restaurant.create!(
+  restaurant = Restaurant.create!(
     name: name,
     address: address,
     category: category
   )
+
+  # Create reviews for each restaurant
+  5.times do
+    content = Faker::Lorem.paragraph(sentence_count: 3)
+    rating = rand(0..5)
+
+    restaurant.reviews.create!(
+      content: content,
+      rating: rating
+    )
+  end
 end
 
-puts "Seeded restaurants using Faker"
+puts "Seeded restaurants and reviews using Faker"
